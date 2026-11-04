@@ -1,1 +1,0 @@
-print("Dit is het bestand prijs.py")
