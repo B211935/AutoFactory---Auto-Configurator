@@ -1,5 +1,4 @@
 import auto_kiezen
-import prijs
 import opslaan
 import inlezen
 
