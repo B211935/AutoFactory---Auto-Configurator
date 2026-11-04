@@ -32,48 +32,56 @@ def inlezen():
                     "instellingen": configuratie
                 })
 
-            # Menu met configuraties
-            print("\nKies een configuratie:\n")
-
-            for i, config in enumerate(configuraties, start=1):
-                print(f"{i}. {config['naam']}")
-
-            print("0. Terug naar hoofdmenu")
-
-            keuze = input("\nMaak een keuze: ")
-
-            if keuze == "0":
+            if len(configuraties) == 0:
+                print("Geen geldige configuraties gevonden.")
                 return
 
-            if keuze.isdigit() and 1 <= int(keuze) <= len(configuraties):
-                gekozen = configuraties[int(keuze) - 1]
-                config = gekozen["instellingen"]
+            # Menu met configuraties
+            while True:
+                print("\nKies een configuratie:\n")
 
-                # Volledige configuratie tonen
-                print("\n================================")
-                print("       AUTO CONFIGURATIE")
-                print("================================")
+                for i, config in enumerate(configuraties, start=1):
+                    print(f"{i}. {config['naam']}")
 
-                print("Naam:", gekozen["naam"])
-                print("Model:", config["model"])
-                print("Merk:", config["merk"])
-                print("Motor:", config["motor"])
-                print("Kleur:", config["kleur"])
-                print("Uitvoering:", config["uitvoering"])
+                print("0. Terug naar hoofdmenu")
 
-                print("\nExtra opties:")
+                keuze = input("\nMaak een keuze: ")
 
-                if len(config["opties"]) == 0:
-                    print("Geen extra opties.")
+                if keuze == "0":
+                    return
+
+                elif keuze.isdigit() and 1 <= int(keuze) <= len(configuraties):
+                    gekozen = configuraties[int(keuze) - 1]
+                    config = gekozen["instellingen"]
+                    break
+
                 else:
-                    for optie in config["opties"]:
-                        print("-", optie)
+                    print("Ongeldige keuze. Kies een bestaand nummer.")
 
-                print("\nTotaalprijs: €", config["prijs"])
-                print("================================")
+            # Volledige configuratie tonen
+            print("\n================================")
+            print("       AUTO CONFIGURATIE")
+            print("================================")
 
+            print("Naam:", gekozen["naam"])
+            print("Model:", config["model"])
+            print("Merk:", config["merk"])
+            print("Motor:", config["motor"])
+            print("Kleur:", config["kleur"])
+            print("Uitvoering:", config["uitvoering"])
+
+            print("\nExtra opties:")
+
+            if len(config["opties"]) == 0:
+                print("Geen extra opties.")
             else:
-                print("Ongeldige keuze.")
+                for optie in config["opties"]:
+                    print("-", optie)
+
+            print("\nTotaalprijs: €", config["prijs"])
+            print("================================")
+
+            input("\nDruk op Enter om terug te gaan naar het hoofdmenu...")
 
     else:
         print("Nog geen configuraties gevonden. Sla er eerst eentje op!")
